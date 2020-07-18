@@ -1,0 +1,3 @@
+[20-07-18 09:37:13:462 HKT] 		Target OpenWeatherOrg City ID : 1850147
+[20-07-18 09:37:13:511 HKT] 		Weather description : shower rain
+[20-07-18 09:37:13:513 HKT] {main={temp_min=293.15, humidity=100.0, pressure=1012.0, feels_like=294.33, temp=293.15, temp_max=293.15}, dt=1.595035815E9, id=1850147.0, name=Tokyo, coord={lat=35.69, lon=139.69}, clouds={all=75.0}, wind={speed=3.6, deg=50.0}, cod=200.0, timezone=32400.0, sys={sunrise=1.595014718E9, id=8077.0, sunset=1.595066154E9, type=1.0, country=JP}, weather=[{icon=09d, main=Rain, id=521.0, description=shower rain}, {description=mist, icon=50d, main=Mist, id=701.0}], rain={1h=13.97}, base=stations, visibility=5000.0}
