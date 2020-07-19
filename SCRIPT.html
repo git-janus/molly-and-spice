@@ -1,0 +1,26 @@
+<script>
+var appLink = {DEV:"https://script.google.com/macros/s/AKfycbyLjLk-HFsgDAvpxoJQXXaJWmvfKg9XfZAoHt8D4A5-/dev", 
+               EXEC:"https://script.google.com/macros/s/AKfycbw9H6Ca0qYkcSZncPjWPMlJ_Ik1rhK4tRiLrGlxA4wVZWioRkpk/exec"};
+
+function submit_credential(){
+ var uname = document.getElementById("uname").value;
+ var psw = document.getElementById("psw").value;
+ google.script.run.withSuccessHandler(credential_submisstion).LogInAccepted(uname,psw);
+}
+
+function credential_submisstion(result){
+ var post_user_data = "?username=" + result.USERDATA.USERNAME + "&email=" + result.USERDATA.EMAIL + "&imgUrl=" + result.USERDATA.IMAGELINK;
+ var appUrl;
+ if(result.ACCEPTED){
+  if(result.USERDATA.ISADMIN){
+   appUrl = appLink.EXEC + post_user_data;
+  }else{
+   appUrl = appLink.DEV_USER + post_user_data;
+  }
+   window.open(appUrl, '_top');
+ }else{
+  alert(result.ERROR_MSG);
+ }
+}
+</script>
+
