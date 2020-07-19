@@ -1,0 +1,16 @@
+<script>
+function logout(){
+  var uname = document.getElementById("user_name").innerText;
+  google.script.run.withFailureHandler(not_logged).withSuccessHandler(show_login).LOGOUT(uname);
+}
+
+function show_login(url){
+ window.open(url, '_top');
+}
+
+function not_logged(){
+ alert("test");
+}
+</script>
+
+
