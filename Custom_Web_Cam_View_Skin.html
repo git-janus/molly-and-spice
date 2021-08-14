@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <style type="text/css">
+      .vElementContainer{
+        margin: 0px auto;
+        position: relative;
+        width: 500px;
+        height: 375px;
+        border: 2px #333 solid;
+        background-color: black;
+      }
+      .vElement{
+        width: 500px;
+        height: 375px;
+        background-color: orange;
+      }
+      .overlay1{
+        position: absolute;
+        z-index: 10;
+        top: 0px;
+        width:490px;
+        height:375px;
+        padding-left:5px;
+        padding-right:5px;
+        margin:auto;
+        /* background-color: aqua; */
+        background-color: rgba(00, 0, 0, 0);
+      }
+      .domain, .missionStatus{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color:white;
+      }
+    </style>
+  </head>
+  <body bgcolor="black">
+    <div id="container" class="vElementContainer">
+      <video autoplay="true" id="videoElement" class="vElement"></video>
+      <div id="topSkin1" class="overlay1">
+        <span class="domain">TRACKINGPERSEVERANCE.COM</span>
+        <br>
+        <span class="missionStatus">MISSION DAY<br>SOL <span id="missionDay">loading...</span></span>
+        <br>
+        <span class="missionStatus">PRESSURE<br><span id="pressure">loading...</span> PSI</span>
+        <br>
+        <span class="missionStatus">TEMPERATURE(min)<br><span id="minTempF">loading...</span> °F/<span id="minTempC">loading</span> °C</span>
+        <br>
+        <span class="missionStatus">TEMPERATURE(max)<br><span id="maxTempF">loading...</span> °F/<span id="maxTempC">loading</span> °C</span>
+      </div>
+    </div>
+    <script type="text/javascript">
+        google.script.run.withSuccessHandler(setMissionStatus).getMissionStatus();
+        var video = document.querySelector("#videoElement");
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUsermedia 
+            || navigator.mozGetUserMedia || navigato.msGetUserMedia || navigator.oGetUserMedia;
+        if(navigator.getUserMedia){
+          navigator.getUserMedia({video:true}, handleVideo, videoError);
+        }
+        function handleVideo(stream){
+          video.srcObject = stream;
+          video.play();
+        }
+        function videoError(e){}
+        function setMissionStatus(data){
+          // {SOL:targetData[2],
+          // MINTEMPF:targetData[5].toFixed(2),MAXTEMPF:targetData[6].toFixed(2),
+          // MINTEMPC:convertFTempToC(targetData[5]),MAXTEMPC:convertFTempToC(targetData[6]),
+          // PRESSURE:targetData[7]};
+          document.getElementById("missionDay").innerHTML=data.SOL;
+          document.getElementById("pressure").innerHTML=data.PRESSURE;
+          document.getElementById("minTempF").innerHTML=data.MINTEMPF;
+          document.getElementById("minTempC").innerHTML=data.MINTEMPC;
+          document.getElementById("maxTempF").innerHTML=data.MAXTEMPF;
+          document.getElementById("maxTempC").innerHTML=data.MAXTEMPC;
+        }
+    </script> 
+  </body>
+</html>
